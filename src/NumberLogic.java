@@ -5,6 +5,7 @@ import java.util.Collections;
 public class NumberLogic {
 
     ArrayList<Integer> tiles = new ArrayList<>();
+    ArrayList<Integer> numerical = new ArrayList<>();
 
     public void startTiles(){
         tiles.clear();
