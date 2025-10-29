@@ -1,6 +1,8 @@
 void main() {
 
-    NumberLogic nl = new NumberLogic();
+    tile nl = new tile();
     nl.startTiles();
+    nl.printTilesList();
+    new VisualFrame();
 
 }
