@@ -16,6 +16,8 @@ public class VisualFrame extends JFrame implements ActionListener {
     JButton newGame = new JButton("New Game");
 
     JButton previousButton = null;
+    JButton currentButton = null;
+
     JButton n0 = new JButton("blank");
     JButton n1 = new JButton("1");
     JButton n2 = new JButton("2");
@@ -185,7 +187,7 @@ public class VisualFrame extends JFrame implements ActionListener {
     public boolean isBlankNear(int index) {
         int size = tile.tiles.size();
 
-        if (index-1 > 0 && tile.tiles.get(index - 1) == 0
+        if (index-1 >= 0 && tile.tiles.get(index - 1) == 0
 
                 || index + 1 < size && tile.tiles.get(index + 1) == 0
 
@@ -200,28 +202,33 @@ public class VisualFrame extends JFrame implements ActionListener {
 
     }
 
-    public void buttonPress(int index, JButton button){
+    public void buttonPress(int index, JButton currentButton){
         System.out.println(tile.tiles.get(index));
         if (!numberSelected) {
             if (!isBlank(index)) {
                 if(isBlankNear(index)) {
-                    previousButton = button;
-                    previousNumber = 0;
+                    previousButton = currentButton;
+                    previousNumber = index;
                     numberSelected = true;
                 }
             }
         } else {
             if(isBlank(index)){
-                previousButton.setText("blank");
+                tile.tiles.set(index, tile.tiles.get(previousNumber));
                 tile.tiles.set(previousNumber, 0);
-                numberSelected=false;
 
+                currentButton.setText(String.valueOf(tile.tiles.get(index)));
+                previousButton.setText("0");
+
+                numberSelected = false;
             } else {
+                previousButton = currentButton;
                 previousNumber = 0;
                 numberSelected = true;
             }
         }
     }
+
     }
 
 
