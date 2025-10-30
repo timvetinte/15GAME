@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,8 @@ public class VisualFrame extends JFrame implements ActionListener {
     JButton previousButton = null;
     JButton currentButton = null;
 
-    JButton n0 = new JButton("blank");
+    JButton n0 = new JButton("0");
+    Border border = n0.getBorder();
     JButton n1 = new JButton("1");
     JButton n2 = new JButton("2");
     JButton n3 = new JButton("3");
@@ -218,7 +220,9 @@ public class VisualFrame extends JFrame implements ActionListener {
                 tile.tiles.set(previousNumber, 0);
 
                 currentButton.setText(String.valueOf(tile.tiles.get(index)));
-                previousButton.setText("0");
+                setColor(false, currentButton);
+                previousButton.setText("");
+                setColor(true, previousButton);
 
                 numberSelected = false;
             } else {
@@ -226,6 +230,17 @@ public class VisualFrame extends JFrame implements ActionListener {
                 previousNumber = 0;
                 numberSelected = true;
             }
+        }
+    }
+    public void setColor(boolean darkOrRegular, JButton button){
+        button.setOpaque(true);
+        if (darkOrRegular) {
+            button.setBorder(null);
+            button.setContentAreaFilled(false);
+            button.setFocusPainted(false);
+        } else {
+            button.setContentAreaFilled(true);
+            button.setBorder(border);
         }
     }
 
