@@ -8,7 +8,7 @@ public class VisualFrame extends JFrame implements ActionListener {
 
     boolean isZero = false;
     int numberToSwitchTo = 0;
-    int previousIndex = 0;
+    int index;
 
     JPanel Buttons = new JPanel();
     JPanel Game = new JPanel();
@@ -110,7 +110,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n0) {
             System.out.println(tile.tiles.get(0));
-            if (isBlankNear(0)) {
+            index=0;
+            if(tile.tiles.get(index+1) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -119,7 +120,7 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n1) {
             System.out.println(tile.tiles.get(1));
-            if (isBlankNear(1)) {
+            if(tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -128,7 +129,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n2) {
             System.out.println(tile.tiles.get(2));
-            if (isBlankNear(2)) {
+            index=2;
+            if(tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -137,7 +139,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n3) {
             System.out.println(tile.tiles.get(3));
-            if (isBlankNear(3)) {
+            index=3;
+            if(tile.tiles.get(index+1) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -146,7 +149,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n4) {
             System.out.println(tile.tiles.get(4));
-            if (isBlankNear(4)) {
+            index=4;
+            if(tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -155,7 +159,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n5) {
             System.out.println(tile.tiles.get(5));
-            if (isBlankNear(5)) {
+            index=5;
+            if(tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -164,7 +169,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n6) {
             System.out.println(tile.tiles.get(6));
-            if (isBlankNear(6)) {
+            index=6;
+            if(tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -173,7 +179,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n7) {
             System.out.println(tile.tiles.get(7));
-            if (isBlankNear(7)) {
+            index=7;
+            if (tile.tiles.get(index-1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0 ){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -182,7 +189,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n8) {
             System.out.println(tile.tiles.get(8));
-            if (isBlankNear(8)) {
+            index=8;
+            if(tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -191,7 +199,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n9) {
             System.out.println(tile.tiles.get(9));
-            if (isBlankNear(9)) {
+            index=9;
+            if(tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -200,7 +209,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n10) {
             System.out.println(tile.tiles.get(10));
-            if (isBlankNear(10)) {
+            index = 10;
+            if(tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -209,7 +219,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n11) {
             System.out.println(tile.tiles.get(11));
-            if (isBlankNear(11)) {
+            index = 11;
+            if (tile.tiles.get(index-1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0 ){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -218,7 +229,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n12) {
             System.out.println(tile.tiles.get(12));
-            if (isBlankNear(12)) {
+            index = 12;
+            if (tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 ){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -226,8 +238,9 @@ public class VisualFrame extends JFrame implements ActionListener {
         }
 
         if (source == n13) {
+            index=13;
             System.out.println(tile.tiles.get(13));
-            if (isBlankNear(13)) {
+            if (tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 ){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -236,7 +249,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n14) {
             System.out.println(tile.tiles.get(14));
-            if (isBlankNear(14)) {
+            index=14;
+            if (tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 ){
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -245,7 +259,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == n15) {
             System.out.println(tile.tiles.get(15));
-            if (isBlankNear(15)) {
+            index=15;
+            if (tile.tiles.get(index-1) == 0 || tile.tiles.get(index-4) == 0 ) {
                 System.out.println("BLANK IS NEAR");
             } else {
                 System.out.println("BLANK IS NOT NEAR");
@@ -254,7 +269,7 @@ public class VisualFrame extends JFrame implements ActionListener {
     }
 
         public boolean isBlankNear(int index){
-        if(tile.tiles.indexOf(index-1) == 0 || tile.tiles.indexOf(index+1) == 0 || tile.tiles.indexOf(index-4) == 0 || tile.tiles.indexOf(index+4) == 0){
+        if(tile.tiles.get(index-1) == 0 || tile.tiles.get(index+1) == 0 || tile.tiles.get(index-4) == 0 || tile.tiles.get(index+4) == 0){
         return true;
     } else return false;
 
