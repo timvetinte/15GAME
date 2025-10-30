@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 public class VisualFrame extends JFrame implements ActionListener {
 
 
-
+    int numberToSwitchTo = 0;
+    boolean numberSelected = false;
     int index;
 
     JPanel Buttons = new JPanel();
@@ -111,7 +112,7 @@ public class VisualFrame extends JFrame implements ActionListener {
         if (source == n0) {
             System.out.println(tile.tiles.getFirst());
             index = 0;
-            if(isBlank(index)) {
+            if(!isBlank(index)) {
                 isBlankNear(index);
             }
         }
@@ -119,97 +120,127 @@ public class VisualFrame extends JFrame implements ActionListener {
         if (source == n1) {
             System.out.println(tile.tiles.get(1));
             index = 1;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n2) {
             System.out.println(tile.tiles.get(2));
             index = 2;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n3) {
             System.out.println(tile.tiles.get(3));
             index = 3;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n4) {
             System.out.println(tile.tiles.get(4));
             index = 4;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n5) {
             System.out.println(tile.tiles.get(5));
             index = 5;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n6) {
             System.out.println(tile.tiles.get(6));
             index = 6;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n7) {
             System.out.println(tile.tiles.get(7));
             index = 7;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n8) {
             System.out.println(tile.tiles.get(8));
             index = 8;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n9) {
             System.out.println(tile.tiles.get(9));
             index = 9;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n10) {
             System.out.println(tile.tiles.get(10));
             index = 10;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n11) {
             System.out.println(tile.tiles.get(11));
             index = 11;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n12) {
             System.out.println(tile.tiles.get(12));
             index = 12;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n13) {
             System.out.println(tile.tiles.get(13));
             index = 13;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n14) {
             System.out.println(tile.tiles.get(14));
             index = 14;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
         if (source == n15) {
             System.out.println(tile.tiles.get(15));
             index = 15;
-            isBlankNear(index);
+            if(!isBlank(index)) {
+                isBlankNear(index);
+            }
         }
 
     }
 
     public boolean isBlank(int index){
-        if (tile.tiles.get(index) != 0){
+        if (tile.tiles.get(index) == 0){
             System.out.println("is blank");
             return true;
         }else return false;
