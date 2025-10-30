@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VisualFrame extends JFrame implements ActionListener {
+
+
+
     JPanel Buttons = new JPanel();
     JPanel Game = new JPanel();
     JButton newGame = new JButton("New Game");
@@ -24,8 +27,7 @@ public class VisualFrame extends JFrame implements ActionListener {
     JButton n12 = new JButton("12");
     JButton n13 = new JButton("13");
     JButton n14 = new JButton("14");
-
-
+    JButton n15 = new JButton("15");
 
 
     public VisualFrame(){
@@ -35,23 +37,20 @@ public class VisualFrame extends JFrame implements ActionListener {
         Buttons.add(newGame);
 
         this.add(Game, BorderLayout.CENTER);
+        Game.setLayout(new GridLayout(4, 5));
 
-        Game.add(n0);
-        Game.add(n1);
-        Game.add(n2);
-        Game.add(n3);
-        Game.add(n4);
-        Game.add(n5);
-        Game.add(n6);
-        Game.add(n7);
-        Game.add(n8);
-        Game.add(n9);
-        Game.add(n10);
-        Game.add(n11);
-        Game.add(n12);
-        Game.add(n13);
-        Game.add(n14);
+        Game.add(n0);Game.add(n1);Game.add(n2);Game.add(n3);Game.add(n4);Game.add(n5);
+        Game.add(n6);Game.add(n7);Game.add(n8);Game.add(n9);Game.add(n10);Game.add(n11);
+        Game.add(n12);Game.add(n13);Game.add(n14);Game.add(n15);
 
+        n0.addActionListener(this);n7.addActionListener(this);
+        n1.addActionListener(this);n8.addActionListener(this);
+        n2.addActionListener(this);n9.addActionListener(this);
+        n3.addActionListener(this);n10.addActionListener(this);
+        n4.addActionListener(this);n11.addActionListener(this);
+        n5.addActionListener(this);n12.addActionListener(this);
+        n6.addActionListener(this);n13.addActionListener(this);
+        n14.addActionListener(this);n15.addActionListener(this);
 
 
         Game.setBorder(new EmptyBorder(5, 5, 0, 5));
@@ -60,11 +59,82 @@ public class VisualFrame extends JFrame implements ActionListener {
         setMinimumSize(new Dimension(400, 400));
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+        n0.setText(String.valueOf(tile.tiles.getFirst()));
+        n1.setText(String.valueOf(tile.tiles.get(1)));
+        n2.setText(String.valueOf(tile.tiles.get(2)));
+        n3.setText(String.valueOf(tile.tiles.get(3)));
+        n4.setText(String.valueOf(tile.tiles.get(4)));
+        n5.setText(String.valueOf(tile.tiles.get(5)));
+        n6.setText(String.valueOf(tile.tiles.get(6)));
+        n7.setText(String.valueOf(tile.tiles.get(7)));
+        n8.setText(String.valueOf(tile.tiles.get(8)));
+        n9.setText(String.valueOf(tile.tiles.get(9)));
+        n10.setText(String.valueOf(tile.tiles.get(10)));
+        n11.setText(String.valueOf(tile.tiles.get(11)));
+        n12.setText(String.valueOf(tile.tiles.get(12)));
+        n13.setText(String.valueOf(tile.tiles.get(13)));
+        n14.setText(String.valueOf(tile.tiles.get(14)));
+        n15.setText(String.valueOf(tile.tiles.get(15)));
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if(source==n0){
+            System.out.println("blank");
+            System.out.println(tile.tiles.getFirst());
+
+        }
+        if(source==n1){
+            System.out.println(tile.tiles.get(1));
+        }
+        if(source==n2){
+            System.out.println(tile.tiles.get(2));
+        }
+        if(source==n3){
+            System.out.println(tile.tiles.get(3));
+        }
+        if(source==n4){
+            System.out.println(tile.tiles.get(4));
+        }
+        if(source==n5){
+            System.out.println(tile.tiles.get(5));
+        }
+        if(source==n6){
+            System.out.println(tile.tiles.get(6));
+        }
+        if(source==n7){
+            System.out.println(tile.tiles.get(7));
+        }
+        if(source==n8){
+            System.out.println(tile.tiles.get(8));
+        }
+        if(source==n9){
+            System.out.println(tile.tiles.get(9));
+        }
+        if(source==n10){
+            System.out.println(tile.tiles.get(10));
+        }
+        if(source==n11){
+            System.out.println(tile.tiles.get(11));
+        }
+        if(source==n12){
+            System.out.println(tile.tiles.get(12));
+        }
+        if(source==n13){
+            System.out.println(tile.tiles.get(13));
+        }
+        if(source==n14){
+            System.out.println(tile.tiles.get(14));
+        }
+        if(source==n15){
+            System.out.println(tile.tiles.get(15));
+        }
+
 
     }
 }

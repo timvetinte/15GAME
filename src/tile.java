@@ -4,7 +4,7 @@ import java.util.Collections;
 
 public class tile {
 
-    ArrayList<tile> tiles = new ArrayList<>();
+    static ArrayList<Integer> tiles = new ArrayList<>();
     ArrayList<Integer> numerical = new ArrayList<>();
 
     private int index;
@@ -18,6 +18,8 @@ public class tile {
         this.number=number;
     }
 
+
+
     public int getIndex() {
         return index;
     }
@@ -25,15 +27,14 @@ public class tile {
     public void startTiles(){
         tiles.clear();
         for (int i = 0; i < 15; i++) {
-            tile newTile = new tile(i, i);
-            tiles.add(newTile);
+            tiles.add(i);
             Collections.shuffle(tiles);
         }
     }
 
     public void printTilesList(){
-        for(tile t : tiles){
-            System.out.println(t.getIndex());
+        for(Integer t : tiles){
+            System.out.println(t);
         }
     }
 
