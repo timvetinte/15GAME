@@ -6,12 +6,15 @@ import java.awt.event.ActionListener;
 
 public class VisualFrame extends JFrame implements ActionListener {
 
-
+    boolean isZero = false;
+    int numberToSwitchTo = 0;
+    int previousIndex = 0;
 
     JPanel Buttons = new JPanel();
     JPanel Game = new JPanel();
     JButton newGame = new JButton("New Game");
 
+    JButton previousButton = null;
     JButton n0 = new JButton("blank");
     JButton n1 = new JButton("1");
     JButton n2 = new JButton("2");
@@ -30,7 +33,7 @@ public class VisualFrame extends JFrame implements ActionListener {
     JButton n15 = new JButton("15");
 
 
-    public VisualFrame(){
+    public VisualFrame() {
         this.add(Buttons, BorderLayout.NORTH);
         Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.X_AXIS));
         Buttons.setBorder(new EmptyBorder(10, 0, 5, 0));
@@ -39,18 +42,39 @@ public class VisualFrame extends JFrame implements ActionListener {
         this.add(Game, BorderLayout.CENTER);
         Game.setLayout(new GridLayout(4, 5));
 
-        Game.add(n0);Game.add(n1);Game.add(n2);Game.add(n3);Game.add(n4);Game.add(n5);
-        Game.add(n6);Game.add(n7);Game.add(n8);Game.add(n9);Game.add(n10);Game.add(n11);
-        Game.add(n12);Game.add(n13);Game.add(n14);Game.add(n15);
+        Game.add(n0);
+        Game.add(n1);
+        Game.add(n2);
+        Game.add(n3);
+        Game.add(n4);
+        Game.add(n5);
+        Game.add(n6);
+        Game.add(n7);
+        Game.add(n8);
+        Game.add(n9);
+        Game.add(n10);
+        Game.add(n11);
+        Game.add(n12);
+        Game.add(n13);
+        Game.add(n14);
+        Game.add(n15);
 
-        n0.addActionListener(this);n7.addActionListener(this);
-        n1.addActionListener(this);n8.addActionListener(this);
-        n2.addActionListener(this);n9.addActionListener(this);
-        n3.addActionListener(this);n10.addActionListener(this);
-        n4.addActionListener(this);n11.addActionListener(this);
-        n5.addActionListener(this);n12.addActionListener(this);
-        n6.addActionListener(this);n13.addActionListener(this);
-        n14.addActionListener(this);n15.addActionListener(this);
+        n0.addActionListener(this);
+        n7.addActionListener(this);
+        n1.addActionListener(this);
+        n8.addActionListener(this);
+        n2.addActionListener(this);
+        n9.addActionListener(this);
+        n3.addActionListener(this);
+        n10.addActionListener(this);
+        n4.addActionListener(this);
+        n11.addActionListener(this);
+        n5.addActionListener(this);
+        n12.addActionListener(this);
+        n6.addActionListener(this);
+        n13.addActionListener(this);
+        n14.addActionListener(this);
+        n15.addActionListener(this);
 
 
         Game.setBorder(new EmptyBorder(5, 5, 0, 5));
@@ -84,57 +108,159 @@ public class VisualFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
-        if(source==n0){
-            System.out.println("blank");
-            System.out.println(tile.tiles.getFirst());
-
+        if (source == n0) {
+            System.out.println(tile.tiles.get(0));
+            if (isBlankNear(0)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
         }
-        if(source==n1){
+
+        if (source == n1) {
             System.out.println(tile.tiles.get(1));
-        }
-        if(source==n2){
-            System.out.println(tile.tiles.get(2));
-        }
-        if(source==n3){
-            System.out.println(tile.tiles.get(3));
-        }
-        if(source==n4){
-            System.out.println(tile.tiles.get(4));
-        }
-        if(source==n5){
-            System.out.println(tile.tiles.get(5));
-        }
-        if(source==n6){
-            System.out.println(tile.tiles.get(6));
-        }
-        if(source==n7){
-            System.out.println(tile.tiles.get(7));
-        }
-        if(source==n8){
-            System.out.println(tile.tiles.get(8));
-        }
-        if(source==n9){
-            System.out.println(tile.tiles.get(9));
-        }
-        if(source==n10){
-            System.out.println(tile.tiles.get(10));
-        }
-        if(source==n11){
-            System.out.println(tile.tiles.get(11));
-        }
-        if(source==n12){
-            System.out.println(tile.tiles.get(12));
-        }
-        if(source==n13){
-            System.out.println(tile.tiles.get(13));
-        }
-        if(source==n14){
-            System.out.println(tile.tiles.get(14));
-        }
-        if(source==n15){
-            System.out.println(tile.tiles.get(15));
+            if (isBlankNear(1)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
         }
 
+        if (source == n2) {
+            System.out.println(tile.tiles.get(2));
+            if (isBlankNear(2)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n3) {
+            System.out.println(tile.tiles.get(3));
+            if (isBlankNear(3)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n4) {
+            System.out.println(tile.tiles.get(4));
+            if (isBlankNear(4)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n5) {
+            System.out.println(tile.tiles.get(5));
+            if (isBlankNear(5)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n6) {
+            System.out.println(tile.tiles.get(6));
+            if (isBlankNear(6)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n7) {
+            System.out.println(tile.tiles.get(7));
+            if (isBlankNear(7)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n8) {
+            System.out.println(tile.tiles.get(8));
+            if (isBlankNear(8)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n9) {
+            System.out.println(tile.tiles.get(9));
+            if (isBlankNear(9)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n10) {
+            System.out.println(tile.tiles.get(10));
+            if (isBlankNear(10)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n11) {
+            System.out.println(tile.tiles.get(11));
+            if (isBlankNear(11)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n12) {
+            System.out.println(tile.tiles.get(12));
+            if (isBlankNear(12)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n13) {
+            System.out.println(tile.tiles.get(13));
+            if (isBlankNear(13)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n14) {
+            System.out.println(tile.tiles.get(14));
+            if (isBlankNear(14)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+
+        if (source == n15) {
+            System.out.println(tile.tiles.get(15));
+            if (isBlankNear(15)) {
+                System.out.println("BLANK IS NEAR");
+            } else {
+                System.out.println("BLANK IS NOT NEAR");
+            }
+        }
+    }
+
+        public boolean isBlankNear(int index){
+        if(tile.tiles.indexOf(index-1) == 0 || tile.tiles.indexOf(index+1) == 0 || tile.tiles.indexOf(index-4) == 0 || tile.tiles.indexOf(index+4) == 0){
+        return true;
+    } else return false;
 
     }
 }
+
+
+
+

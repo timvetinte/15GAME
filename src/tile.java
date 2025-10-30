@@ -26,7 +26,7 @@ public class tile {
 
     public void startTiles(){
         tiles.clear();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 16; i++) {
             tiles.add(i);
             Collections.shuffle(tiles);
         }
