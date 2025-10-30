@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class VisualFrame extends JFrame implements ActionListener {
 
 
-    int numberToSwitchTo = 0;
+    int previousNumber = 0;
     boolean numberSelected = false;
     int index;
 
@@ -110,131 +110,67 @@ public class VisualFrame extends JFrame implements ActionListener {
         Object source = e.getSource();
 
         if (source == n0) {
-            System.out.println(tile.tiles.getFirst());
-            index = 0;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(0, n0);
         }
 
         if (source == n1) {
-            System.out.println(tile.tiles.get(1));
-            index = 1;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(1, n1);
         }
 
         if (source == n2) {
-            System.out.println(tile.tiles.get(2));
-            index = 2;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(2, n2);
         }
 
         if (source == n3) {
-            System.out.println(tile.tiles.get(3));
-            index = 3;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(3, n3);
         }
 
         if (source == n4) {
-            System.out.println(tile.tiles.get(4));
-            index = 4;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(4, n4);
         }
 
         if (source == n5) {
-            System.out.println(tile.tiles.get(5));
-            index = 5;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(5, n5);
         }
 
         if (source == n6) {
-            System.out.println(tile.tiles.get(6));
-            index = 6;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(6, n6);
         }
 
         if (source == n7) {
-            System.out.println(tile.tiles.get(7));
-            index = 7;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(7, n7);
         }
 
         if (source == n8) {
-            System.out.println(tile.tiles.get(8));
-            index = 8;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(8, n8);
         }
 
         if (source == n9) {
-            System.out.println(tile.tiles.get(9));
-            index = 9;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(9, n9);
         }
 
         if (source == n10) {
-            System.out.println(tile.tiles.get(10));
-            index = 10;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(10, n10);
         }
 
         if (source == n11) {
-            System.out.println(tile.tiles.get(11));
-            index = 11;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(11, n11);
         }
 
         if (source == n12) {
-            System.out.println(tile.tiles.get(12));
-            index = 12;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(12, n12);
         }
 
         if (source == n13) {
-            System.out.println(tile.tiles.get(13));
-            index = 13;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(13, n13);
         }
 
         if (source == n14) {
-            System.out.println(tile.tiles.get(14));
-            index = 14;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(14, n14);
         }
 
         if (source == n15) {
-            System.out.println(tile.tiles.get(15));
-            index = 15;
-            if(!isBlank(index)) {
-                isBlankNear(index);
-            }
+            buttonPress(15, n15);
         }
 
     }
@@ -263,7 +199,31 @@ public class VisualFrame extends JFrame implements ActionListener {
             return false;
 
     }
-}
+
+    public void buttonPress(int index, JButton button){
+        System.out.println(tile.tiles.get(index));
+        if (!numberSelected) {
+            if (!isBlank(index)) {
+                if(isBlankNear(index)) {
+                    previousButton = button;
+                    previousNumber = 0;
+                    numberSelected = true;
+                }
+            }
+        } else {
+            if(isBlank(index)){
+                previousButton.setText("blank");
+                tile.tiles.set(previousNumber, 0);
+                numberSelected=false;
+
+            } else {
+                previousNumber = 0;
+                numberSelected = true;
+            }
+        }
+    }
+    }
+
 
 
 
