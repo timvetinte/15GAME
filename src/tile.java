@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -5,38 +6,20 @@ import java.util.Collections;
 public class tile {
 
     static ArrayList<Integer> tiles = new ArrayList<>();
-    ArrayList<Integer> numerical = new ArrayList<>();
-
-    private int index;
-    private int number;
-
-    public tile(){
-    }
-
-    public tile(int index, int number){
-        this.index=index;
-        this.number=number;
-    }
+    static ArrayList<Integer> numerical = new ArrayList<>();
 
 
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void startTiles(){
+    public static void startTiles(){
         tiles.clear();
         for (int i = 0; i < 16; i++) {
             tiles.add(i);
-            Collections.shuffle(tiles);
+            numerical.add(i);
         }
+        Collections.shuffle(tiles);
     }
 
-    public void printTilesList(){
-        for(Integer t : tiles){
-            System.out.println(t);
-        }
-    }
+
 
     public void numericalOrder(){
 

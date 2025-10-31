@@ -4,6 +4,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class VisualFrame extends JFrame implements ActionListener {
 
@@ -20,7 +21,6 @@ public class VisualFrame extends JFrame implements ActionListener {
     JButton currentButton = null;
 
     JButton n0 = new JButton("0");
-    Border border = n0.getBorder();
     JButton n1 = new JButton("1");
     JButton n2 = new JButton("2");
     JButton n3 = new JButton("3");
@@ -37,6 +37,9 @@ public class VisualFrame extends JFrame implements ActionListener {
     JButton n14 = new JButton("14");
     JButton n15 = new JButton("15");
 
+
+
+    Border border = n0.getBorder();
 
     public VisualFrame() {
         this.add(Buttons, BorderLayout.NORTH);
@@ -64,6 +67,25 @@ public class VisualFrame extends JFrame implements ActionListener {
         Game.add(n14);
         Game.add(n15);
 
+        buttonList.add(n0);
+        buttonList.add(n1);
+        buttonList.add(n2);
+        buttonList.add(n3);
+        buttonList.add(n4);
+        buttonList.add(n5);
+        buttonList.add(n6);
+        buttonList.add(n7);
+        buttonList.add(n8);
+        buttonList.add(n9);
+        buttonList.add(n10);
+        buttonList.add(n11);
+        buttonList.add(n12);
+        buttonList.add(n13);
+        buttonList.add(n14);
+        buttonList.add(n15);
+
+        newGame.addActionListener(this);
+
         n0.addActionListener(this);
         n7.addActionListener(this);
         n1.addActionListener(this);
@@ -90,28 +112,23 @@ public class VisualFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
-        n0.setText(String.valueOf(tile.tiles.getFirst()));
-        n1.setText(String.valueOf(tile.tiles.get(1)));
-        n2.setText(String.valueOf(tile.tiles.get(2)));
-        n3.setText(String.valueOf(tile.tiles.get(3)));
-        n4.setText(String.valueOf(tile.tiles.get(4)));
-        n5.setText(String.valueOf(tile.tiles.get(5)));
-        n6.setText(String.valueOf(tile.tiles.get(6)));
-        n7.setText(String.valueOf(tile.tiles.get(7)));
-        n8.setText(String.valueOf(tile.tiles.get(8)));
-        n9.setText(String.valueOf(tile.tiles.get(9)));
-        n10.setText(String.valueOf(tile.tiles.get(10)));
-        n11.setText(String.valueOf(tile.tiles.get(11)));
-        n12.setText(String.valueOf(tile.tiles.get(12)));
-        n13.setText(String.valueOf(tile.tiles.get(13)));
-        n14.setText(String.valueOf(tile.tiles.get(14)));
-        n15.setText(String.valueOf(tile.tiles.get(15)));
+        setAll();
     }
+
+
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
+
+        if (source == newGame) {
+            showConfirmWindow();
+
+
+
+
+        }
 
         if (source == n0) {
             buttonPress(0, n0);
@@ -179,43 +196,43 @@ public class VisualFrame extends JFrame implements ActionListener {
 
     }
 
-    public boolean isBlank(int index){
-        if (tile.tiles.get(index) == 0){
+    public boolean isBlank(int index) {
+        if (tile.tiles.get(index) == 0) {
             System.out.println("is blank");
             return true;
-        }else return false;
+        } else return false;
     }
 
     public boolean isBlankNear(int index) {
         int size = tile.tiles.size();
 
-        if (index-1 >= 0 && tile.tiles.get(index - 1) == 0
+        if (index - 1 >= 0 && tile.tiles.get(index - 1) == 0
 
                 || index + 1 < size && tile.tiles.get(index + 1) == 0
 
-                || index -4 > 0 && tile.tiles.get(index - 4) == 0
+                || index - 4 >= 0 && tile.tiles.get(index - 4) == 0
 
                 || index + 4 < size && tile.tiles.get(index + 4) == 0) {
 
             System.out.println("yes");
             return true;
         } else System.out.println("no");
-            return false;
+        return false;
 
     }
 
-    public void buttonPress(int index, JButton currentButton){
+    public void buttonPress(int index, JButton currentButton) {
         System.out.println(tile.tiles.get(index));
         if (!numberSelected) {
             if (!isBlank(index)) {
-                if(isBlankNear(index)) {
+                if (isBlankNear(index)) {
                     previousButton = currentButton;
                     previousNumber = index;
                     numberSelected = true;
                 }
             }
         } else {
-            if(isBlank(index)){
+            if (isBlank(index)) {
                 tile.tiles.set(index, tile.tiles.get(previousNumber));
                 tile.tiles.set(previousNumber, 0);
 
@@ -227,14 +244,16 @@ public class VisualFrame extends JFrame implements ActionListener {
                 numberSelected = false;
             } else {
                 previousButton = currentButton;
-                previousNumber = 0;
+                previousNumber = index;
                 numberSelected = true;
             }
         }
     }
-    public void setColor(boolean darkOrRegular, JButton button){
+
+    public void setColor(boolean darkOrRegular, JButton button) {
         button.setOpaque(true);
         if (darkOrRegular) {
+            button.setText("");
             button.setBorder(null);
             button.setContentAreaFilled(false);
             button.setFocusPainted(false);
@@ -244,7 +263,67 @@ public class VisualFrame extends JFrame implements ActionListener {
         }
     }
 
+    ArrayList <JButton> buttonList = new ArrayList<>();
+
+    public JButton find0Button(){
+        int index = tile.tiles.indexOf(0);
+        return buttonList.get(index);
     }
+
+    public void setAll(){
+        n0.setText(String.valueOf(tile.tiles.getFirst()));
+        n1.setText(String.valueOf(tile.tiles.get(1)));
+        n2.setText(String.valueOf(tile.tiles.get(2)));
+        n3.setText(String.valueOf(tile.tiles.get(3)));
+        n4.setText(String.valueOf(tile.tiles.get(4)));
+        n5.setText(String.valueOf(tile.tiles.get(5)));
+        n6.setText(String.valueOf(tile.tiles.get(6)));
+        n7.setText(String.valueOf(tile.tiles.get(7)));
+        n8.setText(String.valueOf(tile.tiles.get(8)));
+        n9.setText(String.valueOf(tile.tiles.get(9)));
+        n10.setText(String.valueOf(tile.tiles.get(10)));
+        n11.setText(String.valueOf(tile.tiles.get(11)));
+        n12.setText(String.valueOf(tile.tiles.get(12)));
+        n13.setText(String.valueOf(tile.tiles.get(13)));
+        n14.setText(String.valueOf(tile.tiles.get(14)));
+        n15.setText(String.valueOf(tile.tiles.get(15)));
+        setColor(true, find0Button());
+    }
+
+    public void showConfirmWindow(){
+        JFrame confirmWindow = new JFrame();
+        JPanel buttons = new JPanel();
+        JPanel text = new JPanel(new BorderLayout());
+        confirmWindow.setVisible(true);
+        confirmWindow.setResizable(false);
+        JLabel startNew = new JLabel("Start new game?", SwingConstants.CENTER);
+        JButton positive = new JButton("Yes");
+        JButton negative = new JButton("No");
+        confirmWindow.add(text, BorderLayout.NORTH);
+        confirmWindow.add(buttons);
+        text.add(startNew);
+        buttons.add(positive);
+        buttons.add(negative);
+        buttons.setBorder(new EmptyBorder(15, 15, 15, 15));
+        text.setBorder(new EmptyBorder(15, 5, 0, 5));
+        confirmWindow.pack();
+        confirmWindow.setLocationRelativeTo(null);
+        positive.addActionListener(e ->{
+
+            tile.startTiles();
+            setAll();
+            repaint();
+            confirmWindow.dispose();
+                });
+        negative.addActionListener(e -> {
+            confirmWindow.dispose();
+                });
+    }
+
+
+
+
+}
 
 
 
