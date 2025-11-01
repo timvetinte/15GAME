@@ -11,14 +11,13 @@ public class VisualFrame extends JFrame implements ActionListener {
 
     int previousNumber = 0;
     boolean numberSelected = false;
-    int index;
 
     JPanel Buttons = new JPanel();
     JPanel Game = new JPanel();
     JButton newGame = new JButton("New Game");
+    JLabel moveCounter = new JLabel("");
 
     JButton previousButton = null;
-    JButton currentButton = null;
 
     JButton n0 = new JButton("0");
     JButton n1 = new JButton("1");
@@ -44,6 +43,7 @@ public class VisualFrame extends JFrame implements ActionListener {
         Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.X_AXIS));
         Buttons.setBorder(new EmptyBorder(10, 0, 5, 0));
         Buttons.add(newGame);
+        Buttons.add(moveCounter);
 
         this.add(Game, BorderLayout.CENTER);
         Game.setLayout(new GridLayout(4, 4, 5, 5));
@@ -101,7 +101,7 @@ public class VisualFrame extends JFrame implements ActionListener {
         n14.addActionListener(this);
         n15.addActionListener(this);
 
-        Game.setBorder(new EmptyBorder(5, 5, 0, 5));
+        Game.setBorder(new EmptyBorder(5, 5, 5, 5));
         setVisible(true);
         setSize(500, 500);
         setResizable(false);
@@ -153,15 +153,16 @@ public class VisualFrame extends JFrame implements ActionListener {
             if (isBlankNear(index)) {
                 int blankIndex = tile.tiles.indexOf(0);
                 JButton blankButton = buttonList.get(blankIndex);
-
                 Collections.swap(tile.tiles, index, blankIndex);
-
                 currentButton.setText("");
                 setColor(true, currentButton);
                 blankButton.setText(String.valueOf(tile.tiles.get(blankIndex)));
                 setColor(false, blankButton);
-
-                tile.numericalOrder();
+                moveCounter.setText("Moves: "+ tile.moveCounter(false));
+                if (tile.numericalOrder()) {
+                    setUnavailable(true);
+                    showWinWindow();
+                }
             }
         } else {
             previousButton = currentButton;
@@ -218,11 +219,56 @@ public class VisualFrame extends JFrame implements ActionListener {
         confirmWindow.setLocationRelativeTo(null);
         confirmWindow.setVisible(true);
         positive.addActionListener(e -> {
+            setUnavailable(false);
+            tile.moveCounter(true);
+            moveCounter.setText("");
             tile.startTiles();
             setAll();
             repaint();
             confirmWindow.dispose();
         });
         negative.addActionListener(e -> confirmWindow.dispose());
+    }
+
+    public void showWinWindow() {
+        JFrame winWindow = new JFrame();
+        JPanel buttons = new JPanel();
+        JPanel text = new JPanel(new BorderLayout());
+        winWindow.setResizable(false);
+        JLabel startNew = new JLabel("YOU WON! New Game?", SwingConstants.CENTER);
+        JButton positive = new JButton("Yes");
+        JButton negative = new JButton("No");
+        winWindow.add(text, BorderLayout.NORTH);
+        winWindow.add(buttons);
+        text.add(startNew);
+        buttons.add(positive);
+        buttons.add(negative);
+        buttons.setBorder(new EmptyBorder(15, 15, 15, 15));
+        text.setBorder(new EmptyBorder(15, 5, 0, 5));
+        winWindow.pack();
+        winWindow.setLocationRelativeTo(null);
+        winWindow.setVisible(true);
+        positive.addActionListener(e -> {
+            setUnavailable(false);
+            tile.moveCounter(true);
+            moveCounter.setText("");
+            tile.startTiles();
+            setAll();
+            repaint();
+            winWindow.dispose();
+        });
+        negative.addActionListener(e -> winWindow.dispose());
+    }
+
+    public void setUnavailable(boolean enable) {
+        if (enable) {
+            for (JButton button : buttonList) {
+                button.setEnabled(false);
+            }
+        } else {
+            for (JButton button : buttonList) {
+                button.setEnabled(true);
+            }
+        }
     }
 }

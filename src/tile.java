@@ -7,6 +7,7 @@ public class tile {
 
     static ArrayList<Integer> tiles = new ArrayList<>();
     static ArrayList<Integer> numerical = new ArrayList<>();
+    static int counter = 0;
 
 
     public static void startTiles() {
@@ -34,18 +35,23 @@ public class tile {
     }
 
 
-    public static void numericalOrder() {
+    public static boolean numericalOrder() {
         int numIndex = 0;
         for (int i = 0; i < tiles.size(); i++) {
             if (tiles.get(i) == 0) continue;
             if (!tiles.get(i).equals(numerical.get(numIndex))) {
-                System.out.println("not yet");
-                return;
+                return false;
             }
             numIndex++;
         }
-        System.out.println("WIN!!!!");
+        return true;
     }
 
+    public static int moveCounter(boolean clear) {
+        if (clear) counter = 0;
+        else counter++;
+        return counter;
     }
+}
+
 
