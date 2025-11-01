@@ -1,6 +1,7 @@
 void main() {
 
-    tile.startTiles();
+    //tile.startTiles();
+    tile.testWin();
     new VisualFrame();
 
 }

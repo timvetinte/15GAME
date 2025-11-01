@@ -103,9 +103,8 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         Game.setBorder(new EmptyBorder(5, 5, 0, 5));
         setVisible(true);
-        setSize(700, 700);
-        setMinimumSize(new Dimension(400, 400));
-        setResizable(true);
+        setSize(500, 500);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setAll();

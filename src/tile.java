@@ -19,6 +19,20 @@ public class tile {
         Collections.shuffle(tiles);
     }
 
+    public static void testWin() {
+        tiles.clear();
+        for (int i = 0; i < 16; i++) {
+            tiles.add(i);
+            numerical.add(i);
+        }
+        numerical.removeFirst();
+        tiles.set(4, 1);
+        tiles.set(0, 2);
+        tiles.set(1, 0);
+        tiles.set(2, 3);
+        tiles.set(3, 4);
+    }
+
 
     public static void numericalOrder() {
         int numIndex = 0;
