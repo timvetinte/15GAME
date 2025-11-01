@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class VisualFrame extends JFrame implements ActionListener {
-
 
     int previousNumber = 0;
     boolean numberSelected = false;
@@ -37,8 +37,6 @@ public class VisualFrame extends JFrame implements ActionListener {
     JButton n14 = new JButton("14");
     JButton n15 = new JButton("15");
 
-
-
     Border border = n0.getBorder();
 
     public VisualFrame() {
@@ -48,7 +46,7 @@ public class VisualFrame extends JFrame implements ActionListener {
         Buttons.add(newGame);
 
         this.add(Game, BorderLayout.CENTER);
-        Game.setLayout(new GridLayout(4, 5));
+        Game.setLayout(new GridLayout(4, 4, 5, 5));
 
         Game.add(n0);
         Game.add(n1);
@@ -103,7 +101,6 @@ public class VisualFrame extends JFrame implements ActionListener {
         n14.addActionListener(this);
         n15.addActionListener(this);
 
-
         Game.setBorder(new EmptyBorder(5, 5, 0, 5));
         setVisible(true);
         setSize(700, 700);
@@ -111,12 +108,8 @@ public class VisualFrame extends JFrame implements ActionListener {
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-
         setAll();
     }
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -124,129 +117,57 @@ public class VisualFrame extends JFrame implements ActionListener {
 
         if (source == newGame) {
             showConfirmWindow();
-
-
-
-
         }
 
-        if (source == n0) {
-            buttonPress(0, n0);
-        }
-
-        if (source == n1) {
-            buttonPress(1, n1);
-        }
-
-        if (source == n2) {
-            buttonPress(2, n2);
-        }
-
-        if (source == n3) {
-            buttonPress(3, n3);
-        }
-
-        if (source == n4) {
-            buttonPress(4, n4);
-        }
-
-        if (source == n5) {
-            buttonPress(5, n5);
-        }
-
-        if (source == n6) {
-            buttonPress(6, n6);
-        }
-
-        if (source == n7) {
-            buttonPress(7, n7);
-        }
-
-        if (source == n8) {
-            buttonPress(8, n8);
-        }
-
-        if (source == n9) {
-            buttonPress(9, n9);
-        }
-
-        if (source == n10) {
-            buttonPress(10, n10);
-        }
-
-        if (source == n11) {
-            buttonPress(11, n11);
-        }
-
-        if (source == n12) {
-            buttonPress(12, n12);
-        }
-
-        if (source == n13) {
-            buttonPress(13, n13);
-        }
-
-        if (source == n14) {
-            buttonPress(14, n14);
-        }
-
-        if (source == n15) {
-            buttonPress(15, n15);
-        }
-
+        if (source == n0) buttonPress(0, n0);
+        if (source == n1) buttonPress(1, n1);
+        if (source == n2) buttonPress(2, n2);
+        if (source == n3) buttonPress(3, n3);
+        if (source == n4) buttonPress(4, n4);
+        if (source == n5) buttonPress(5, n5);
+        if (source == n6) buttonPress(6, n6);
+        if (source == n7) buttonPress(7, n7);
+        if (source == n8) buttonPress(8, n8);
+        if (source == n9) buttonPress(9, n9);
+        if (source == n10) buttonPress(10, n10);
+        if (source == n11) buttonPress(11, n11);
+        if (source == n12) buttonPress(12, n12);
+        if (source == n13) buttonPress(13, n13);
+        if (source == n14) buttonPress(14, n14);
+        if (source == n15) buttonPress(15, n15);
     }
 
     public boolean isBlank(int index) {
-        if (tile.tiles.get(index) == 0) {
-            System.out.println("is blank");
-            return true;
-        } else return false;
+        return tile.tiles.get(index) == 0;
     }
 
     public boolean isBlankNear(int index) {
         int size = tile.tiles.size();
-
-        if (index - 1 >= 0 && tile.tiles.get(index - 1) == 0
-
-                || index + 1 < size && tile.tiles.get(index + 1) == 0
-
-                || index - 4 >= 0 && tile.tiles.get(index - 4) == 0
-
-                || index + 4 < size && tile.tiles.get(index + 4) == 0) {
-
-            System.out.println("yes");
-            return true;
-        } else System.out.println("no");
-        return false;
-
+        return (index - 1 >= 0 && tile.tiles.get(index - 1) == 0)
+                || (index + 1 < size && tile.tiles.get(index + 1) == 0)
+                || (index - 4 >= 0 && tile.tiles.get(index - 4) == 0)
+                || (index + 4 < size && tile.tiles.get(index + 4) == 0);
     }
 
     public void buttonPress(int index, JButton currentButton) {
-        System.out.println(tile.tiles.get(index));
-        if (!numberSelected) {
-            if (!isBlank(index)) {
-                if (isBlankNear(index)) {
-                    previousButton = currentButton;
-                    previousNumber = index;
-                    numberSelected = true;
-                }
+        if (!isBlank(index)) {
+            if (isBlankNear(index)) {
+                int blankIndex = tile.tiles.indexOf(0);
+                JButton blankButton = buttonList.get(blankIndex);
+
+                Collections.swap(tile.tiles, index, blankIndex);
+
+                currentButton.setText("");
+                setColor(true, currentButton);
+                blankButton.setText(String.valueOf(tile.tiles.get(blankIndex)));
+                setColor(false, blankButton);
+
+                tile.numericalOrder();
             }
         } else {
-            if (isBlank(index)) {
-                tile.tiles.set(index, tile.tiles.get(previousNumber));
-                tile.tiles.set(previousNumber, 0);
-
-                currentButton.setText(String.valueOf(tile.tiles.get(index)));
-                setColor(false, currentButton);
-                previousButton.setText("");
-                setColor(true, previousButton);
-
-                numberSelected = false;
-            } else {
-                previousButton = currentButton;
-                previousNumber = index;
-                numberSelected = true;
-            }
+            previousButton = currentButton;
+            previousNumber = index;
+            numberSelected = true;
         }
     }
 
@@ -263,38 +184,26 @@ public class VisualFrame extends JFrame implements ActionListener {
         }
     }
 
-    ArrayList <JButton> buttonList = new ArrayList<>();
+    ArrayList<JButton> buttonList = new ArrayList<>();
 
-    public JButton find0Button(){
+    public JButton find0Button() {
         int index = tile.tiles.indexOf(0);
         return buttonList.get(index);
     }
 
-    public void setAll(){
-        n0.setText(String.valueOf(tile.tiles.getFirst()));
-        n1.setText(String.valueOf(tile.tiles.get(1)));
-        n2.setText(String.valueOf(tile.tiles.get(2)));
-        n3.setText(String.valueOf(tile.tiles.get(3)));
-        n4.setText(String.valueOf(tile.tiles.get(4)));
-        n5.setText(String.valueOf(tile.tiles.get(5)));
-        n6.setText(String.valueOf(tile.tiles.get(6)));
-        n7.setText(String.valueOf(tile.tiles.get(7)));
-        n8.setText(String.valueOf(tile.tiles.get(8)));
-        n9.setText(String.valueOf(tile.tiles.get(9)));
-        n10.setText(String.valueOf(tile.tiles.get(10)));
-        n11.setText(String.valueOf(tile.tiles.get(11)));
-        n12.setText(String.valueOf(tile.tiles.get(12)));
-        n13.setText(String.valueOf(tile.tiles.get(13)));
-        n14.setText(String.valueOf(tile.tiles.get(14)));
-        n15.setText(String.valueOf(tile.tiles.get(15)));
+    public void setAll() {
+        for (int i = 0; i < buttonList.size(); i++) {
+            int value = tile.tiles.get(i);
+            JButton button = buttonList.get(i);
+            button.setText(value == 0 ? "" : String.valueOf(value));
+        }
         setColor(true, find0Button());
     }
 
-    public void showConfirmWindow(){
+    public void showConfirmWindow() {
         JFrame confirmWindow = new JFrame();
         JPanel buttons = new JPanel();
         JPanel text = new JPanel(new BorderLayout());
-        confirmWindow.setVisible(true);
         confirmWindow.setResizable(false);
         JLabel startNew = new JLabel("Start new game?", SwingConstants.CENTER);
         JButton positive = new JButton("Yes");
@@ -308,24 +217,13 @@ public class VisualFrame extends JFrame implements ActionListener {
         text.setBorder(new EmptyBorder(15, 5, 0, 5));
         confirmWindow.pack();
         confirmWindow.setLocationRelativeTo(null);
-        positive.addActionListener(e ->{
-
+        confirmWindow.setVisible(true);
+        positive.addActionListener(e -> {
             tile.startTiles();
             setAll();
             repaint();
             confirmWindow.dispose();
-                });
-        negative.addActionListener(e -> {
-            confirmWindow.dispose();
-                });
+        });
+        negative.addActionListener(e -> confirmWindow.dispose());
     }
-
-
-
-
 }
-
-
-
-
-
