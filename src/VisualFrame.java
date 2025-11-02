@@ -10,31 +10,30 @@ import java.util.Collections;
 public class VisualFrame extends JFrame implements ActionListener {
 
     int previousNumber = 0;
-    boolean numberSelected = false;
 
     JPanel Buttons = new JPanel();
     JPanel Game = new JPanel();
     JButton newGame = new JButton("New Game");
     JLabel moveCounter = new JLabel("");
-
     JButton previousButton = null;
 
-    JButton n0 = new JButton("0");
-    JButton n1 = new JButton("1");
-    JButton n2 = new JButton("2");
-    JButton n3 = new JButton("3");
-    JButton n4 = new JButton("4");
-    JButton n5 = new JButton("5");
-    JButton n6 = new JButton("6");
-    JButton n7 = new JButton("7");
-    JButton n8 = new JButton("8");
-    JButton n9 = new JButton("9");
-    JButton n10 = new JButton("10");
-    JButton n11 = new JButton("11");
-    JButton n12 = new JButton("12");
-    JButton n13 = new JButton("13");
-    JButton n14 = new JButton("14");
-    JButton n15 = new JButton("15");
+
+    JButton n0 = new JButton();
+    JButton n1 = new JButton();
+    JButton n2 = new JButton();
+    JButton n3 = new JButton();
+    JButton n4 = new JButton();
+    JButton n5 = new JButton();
+    JButton n6 = new JButton();
+    JButton n7 = new JButton();
+    JButton n8 = new JButton();
+    JButton n9 = new JButton();
+    JButton n10 = new JButton();
+    JButton n11 = new JButton();
+    JButton n12 = new JButton();
+    JButton n13 = new JButton();
+    JButton n14 = new JButton();
+    JButton n15 = new JButton();
 
     Border border = n0.getBorder();
 
@@ -44,10 +43,13 @@ public class VisualFrame extends JFrame implements ActionListener {
         Buttons.setBorder(new EmptyBorder(10, 0, 5, 0));
         Buttons.add(newGame);
         Buttons.add(moveCounter);
+        Buttons.setBackground(Color.WHITE);
 
         this.add(Game, BorderLayout.CENTER);
         Game.setLayout(new GridLayout(4, 4, 5, 5));
 
+
+        //ADDING ALL BUTTONS TO THEIR RESPECTIVE PANEL
         Game.add(n0);
         Game.add(n1);
         Game.add(n2);
@@ -64,6 +66,7 @@ public class VisualFrame extends JFrame implements ActionListener {
         Game.add(n13);
         Game.add(n14);
         Game.add(n15);
+        Game.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         buttonList.add(n0);
         buttonList.add(n1);
@@ -82,8 +85,8 @@ public class VisualFrame extends JFrame implements ActionListener {
         buttonList.add(n14);
         buttonList.add(n15);
 
+        //ACTION LISTENERS
         newGame.addActionListener(this);
-
         n0.addActionListener(this);
         n7.addActionListener(this);
         n1.addActionListener(this);
@@ -101,7 +104,6 @@ public class VisualFrame extends JFrame implements ActionListener {
         n14.addActionListener(this);
         n15.addActionListener(this);
 
-        Game.setBorder(new EmptyBorder(5, 5, 5, 5));
         setVisible(true);
         setSize(500, 500);
         setResizable(false);
@@ -114,10 +116,12 @@ public class VisualFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
+        //NEW GAME
         if (source == newGame) {
             showConfirmWindow();
         }
 
+        //EACH BUTTONS ACTION, LINKS TO BUTTONPRESS WITH BUTTON NAME AND ARRAYLIST INDEX
         if (source == n0) buttonPress(0, n0);
         if (source == n1) buttonPress(1, n1);
         if (source == n2) buttonPress(2, n2);
@@ -136,10 +140,13 @@ public class VisualFrame extends JFrame implements ActionListener {
         if (source == n15) buttonPress(15, n15);
     }
 
+    //CHECKER FOR IF BUTTON IS BLANK
     public boolean isBlank(int index) {
         return tile.tiles.get(index) == 0;
     }
 
+
+    //CHECKER FOR IF BLANK IS NEAR
     public boolean isBlankNear(int index) {
         int size = tile.tiles.size();
         return (index - 1 >= 0 && tile.tiles.get(index - 1) == 0)
@@ -148,9 +155,12 @@ public class VisualFrame extends JFrame implements ActionListener {
                 || (index + 4 < size && tile.tiles.get(index + 4) == 0);
     }
 
+
+    //WHAT HAPPENS WHEN EACH BUTTON IS PRESSED
     public void buttonPress(int index, JButton currentButton) {
         if (!isBlank(index)) {
             if (isBlankNear(index)) {
+
                 int blankIndex = tile.tiles.indexOf(0);
                 JButton blankButton = buttonList.get(blankIndex);
                 Collections.swap(tile.tiles, index, blankIndex);
@@ -158,19 +168,21 @@ public class VisualFrame extends JFrame implements ActionListener {
                 setColor(true, currentButton);
                 blankButton.setText(String.valueOf(tile.tiles.get(blankIndex)));
                 setColor(false, blankButton);
-                moveCounter.setText("Moves: "+ tile.moveCounter(false));
+                moveCounter.setText("Moves: " + tile.moveCounter(false));
                 if (tile.numericalOrder()) {
-                    setUnavailable(true);
                     showWinWindow();
+                    Buttons.setBackground(Color.ORANGE);
+                    setUnavailable(true);
                 }
             }
         } else {
             previousButton = currentButton;
             previousNumber = index;
-            numberSelected = true;
         }
     }
 
+
+    //SETS A BUTTON TO EITHER BLANK OR REGULAR
     public void setColor(boolean darkOrRegular, JButton button) {
         button.setOpaque(true);
         if (darkOrRegular) {
@@ -184,27 +196,33 @@ public class VisualFrame extends JFrame implements ActionListener {
         }
     }
 
-    ArrayList<JButton> buttonList = new ArrayList<>();
+    static ArrayList<JButton> buttonList = new ArrayList<>();
 
-    public JButton find0Button() {
-        int index = tile.tiles.indexOf(0);
-        return buttonList.get(index);
-    }
-
+    //SETS THE 0 TO BLANK
     public void setAll() {
+
         for (int i = 0; i < buttonList.size(); i++) {
             int value = tile.tiles.get(i);
             JButton button = buttonList.get(i);
-            button.setText(value == 0 ? "" : String.valueOf(value));
+
+            if (value == 0) {
+                button.setText("");
+                setColor(true, button);
+            } else {
+                button.setText(String.valueOf(value));
+                setColor(false, button);
+            }
         }
-        setColor(true, find0Button());
     }
 
+
+    //YES OR NO WINDOW
     public void showConfirmWindow() {
+
+        //ELEMENTS
         JFrame confirmWindow = new JFrame();
         JPanel buttons = new JPanel();
         JPanel text = new JPanel(new BorderLayout());
-        confirmWindow.setResizable(false);
         JLabel startNew = new JLabel("Start new game?", SwingConstants.CENTER);
         JButton positive = new JButton("Yes");
         JButton negative = new JButton("No");
@@ -213,23 +231,29 @@ public class VisualFrame extends JFrame implements ActionListener {
         text.add(startNew);
         buttons.add(positive);
         buttons.add(negative);
+
+        //FORMATING OF WINDOW
         buttons.setBorder(new EmptyBorder(15, 15, 15, 15));
         text.setBorder(new EmptyBorder(15, 5, 0, 5));
         confirmWindow.pack();
+        confirmWindow.setResizable(false);
         confirmWindow.setLocationRelativeTo(null);
         confirmWindow.setVisible(true);
+
+        //ACTIONS OF BUTTONS
         positive.addActionListener(e -> {
             setUnavailable(false);
             tile.moveCounter(true);
             moveCounter.setText("");
             tile.startTiles();
             setAll();
-            repaint();
+            Buttons.setBackground(Color.WHITE);
             confirmWindow.dispose();
         });
         negative.addActionListener(e -> confirmWindow.dispose());
     }
 
+    //TRIGGERS UPON WINNING, PROMPT NEW GAME
     public void showWinWindow() {
         JFrame winWindow = new JFrame();
         JPanel buttons = new JPanel();
@@ -248,18 +272,23 @@ public class VisualFrame extends JFrame implements ActionListener {
         winWindow.pack();
         winWindow.setLocationRelativeTo(null);
         winWindow.setVisible(true);
+
+        //YES
         positive.addActionListener(e -> {
             setUnavailable(false);
             tile.moveCounter(true);
             moveCounter.setText("");
             tile.startTiles();
+            Buttons.setBackground(Color.WHITE);
             setAll();
-            repaint();
+
             winWindow.dispose();
         });
+        //NO
         negative.addActionListener(e -> winWindow.dispose());
     }
 
+    //AFTER WIN, BUTTONS CANT BE PRESSED
     public void setUnavailable(boolean enable) {
         if (enable) {
             for (JButton button : buttonList) {
@@ -271,4 +300,7 @@ public class VisualFrame extends JFrame implements ActionListener {
             }
         }
     }
+
 }
+
+

@@ -5,13 +5,18 @@ import java.util.Collections;
 
 public class tile {
 
+    //THE ARRAY FOR THE TILES
     static ArrayList<Integer> tiles = new ArrayList<>();
+
+    //THE ARRAY FOR CORRECT ORDER
     static ArrayList<Integer> numerical = new ArrayList<>();
+
     static int counter = 0;
 
-
+    //START THE GAME
     public static void startTiles() {
         tiles.clear();
+        numerical.clear();
         for (int i = 0; i < 16; i++) {
             tiles.add(i);
             numerical.add(i);
@@ -20,8 +25,10 @@ public class tile {
         Collections.shuffle(tiles);
     }
 
+    //SETS THE TILES TO EASILY WINNABLE
     public static void testWin() {
         tiles.clear();
+        numerical.clear();
         for (int i = 0; i < 16; i++) {
             tiles.add(i);
             numerical.add(i);
@@ -35,6 +42,7 @@ public class tile {
     }
 
 
+    //CHECKER TO SEE IF CORRECT ORDER
     public static boolean numericalOrder() {
         int numIndex = 0;
         for (int i = 0; i < tiles.size(); i++) {
