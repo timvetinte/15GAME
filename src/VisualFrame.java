@@ -14,8 +14,10 @@ public class VisualFrame extends JFrame implements ActionListener {
     JPanel Buttons = new JPanel();
     JPanel Game = new JPanel();
     JButton newGame = new JButton("New Game");
-    JLabel moveCounter = new JLabel("");
+    JLabel moveCounter = new JLabel("Moves: 0");
+    JLabel highScore = new JLabel("Highscore: 0");
     JButton previousButton = null;
+    int hS = 0;
 
 
     JButton n0 = new JButton();
@@ -42,8 +44,12 @@ public class VisualFrame extends JFrame implements ActionListener {
         Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.X_AXIS));
         Buttons.setBorder(new EmptyBorder(10, 0, 5, 0));
         Buttons.add(newGame);
+        Buttons.add(Box.createHorizontalStrut(15));
+        Buttons.add(highScore);
+        Buttons.add(Box.createHorizontalStrut(20));
         Buttons.add(moveCounter);
         Buttons.setBackground(Color.WHITE);
+
 
         this.add(Game, BorderLayout.CENTER);
         Game.setLayout(new GridLayout(4, 4, 5, 5));
@@ -170,6 +176,7 @@ public class VisualFrame extends JFrame implements ActionListener {
                 setColor(false, blankButton);
                 moveCounter.setText("Moves: " + tile.moveCounter(false));
                 if (tile.numericalOrder()) {
+                    setHighScore();
                     showWinWindow();
                     Buttons.setBackground(Color.ORANGE);
                     setUnavailable(true);
@@ -244,7 +251,7 @@ public class VisualFrame extends JFrame implements ActionListener {
         positive.addActionListener(e -> {
             setUnavailable(false);
             tile.moveCounter(true);
-            moveCounter.setText("");
+            moveCounter.setText("Moves: 0");
             tile.startTiles();
             setAll();
             Buttons.setBackground(Color.WHITE);
@@ -277,7 +284,7 @@ public class VisualFrame extends JFrame implements ActionListener {
         positive.addActionListener(e -> {
             setUnavailable(false);
             tile.moveCounter(true);
-            moveCounter.setText("");
+            moveCounter.setText("Moves: 0");
             tile.startTiles();
             Buttons.setBackground(Color.WHITE);
             setAll();
@@ -299,6 +306,13 @@ public class VisualFrame extends JFrame implements ActionListener {
                 button.setEnabled(true);
             }
         }
+    }
+    public void setHighScore(){
+        int moves = tile.moveCounter(false);
+        if(hS == 0 || hS>moves){
+            hS=moves-1;
+        }
+        highScore.setText("Highscore: " + hS);
     }
 
 }
