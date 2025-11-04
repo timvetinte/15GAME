@@ -40,6 +40,7 @@ public class VisualFrame extends JFrame implements ActionListener {
     Border border = n0.getBorder();
 
     public VisualFrame() {
+
         this.add(Buttons, BorderLayout.NORTH);
         Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.X_AXIS));
         Buttons.setBorder(new EmptyBorder(10, 0, 5, 0));
@@ -90,6 +91,10 @@ public class VisualFrame extends JFrame implements ActionListener {
         buttonList.add(n13);
         buttonList.add(n14);
         buttonList.add(n15);
+
+        for(JButton button : buttonList){
+            button.setFont(button.getFont().deriveFont(30f));
+        }
 
         //ACTION LISTENERS
         newGame.addActionListener(this);
