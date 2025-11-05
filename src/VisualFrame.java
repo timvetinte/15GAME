@@ -9,14 +9,11 @@ import java.util.Collections;
 
 public class VisualFrame extends JFrame implements ActionListener {
 
-    int previousNumber = 0;
-
     JPanel Buttons = new JPanel();
     JPanel Game = new JPanel();
     JButton newGame = new JButton("New Game");
     JLabel moveCounter = new JLabel("Moves: 0");
     JLabel highScore = new JLabel("Highscore: 0");
-    JButton previousButton = null;
     int hS = 0;
 
 
@@ -99,18 +96,18 @@ public class VisualFrame extends JFrame implements ActionListener {
         //ACTION LISTENERS
         newGame.addActionListener(this);
         n0.addActionListener(this);
-        n7.addActionListener(this);
         n1.addActionListener(this);
-        n8.addActionListener(this);
         n2.addActionListener(this);
-        n9.addActionListener(this);
         n3.addActionListener(this);
-        n10.addActionListener(this);
         n4.addActionListener(this);
-        n11.addActionListener(this);
         n5.addActionListener(this);
-        n12.addActionListener(this);
         n6.addActionListener(this);
+        n7.addActionListener(this);
+        n8.addActionListener(this);
+        n9.addActionListener(this);
+        n10.addActionListener(this);
+        n11.addActionListener(this);
+        n12.addActionListener(this);
         n13.addActionListener(this);
         n14.addActionListener(this);
         n15.addActionListener(this);
@@ -172,14 +169,25 @@ public class VisualFrame extends JFrame implements ActionListener {
         if (!isBlank(index)) {
             if (isBlankNear(index)) {
 
+                //INDEX OF BLANK TILE
                 int blankIndex = tile.tiles.indexOf(0);
+                //BUTTON OF BLANK TILE
                 JButton blankButton = buttonList.get(blankIndex);
+
+                //SWAPS TEXT
+                blankButton.setText(String.valueOf(tile.tiles.get(index)));
+
+                //SWAPS INDEX OF TILE SELECTED AND BLANK
                 Collections.swap(tile.tiles, index, blankIndex);
-                currentButton.setText("");
+
+                //CHANGES "BLANKNESS" AND TEXT
                 setColor(true, currentButton);
-                blankButton.setText(String.valueOf(tile.tiles.get(blankIndex)));
                 setColor(false, blankButton);
+
+                //UPDATE MOVES
                 moveCounter.setText("Moves: " + tile.moveCounter(false));
+
+                //WIN CONDITION
                 if (tile.numericalOrder()) {
                     setHighScore();
                     showWinWindow();
@@ -187,9 +195,6 @@ public class VisualFrame extends JFrame implements ActionListener {
                     setUnavailable(true);
                 }
             }
-        } else {
-            previousButton = currentButton;
-            previousNumber = index;
         }
     }
 
@@ -201,7 +206,6 @@ public class VisualFrame extends JFrame implements ActionListener {
             button.setText("");
             button.setBorder(null);
             button.setContentAreaFilled(false);
-            button.setFocusPainted(false);
         } else {
             button.setContentAreaFilled(true);
             button.setBorder(border);
