@@ -222,7 +222,6 @@ public class VisualFrame extends JFrame implements ActionListener {
             JButton button = buttonList.get(i);
 
             if (value == 0) {
-                button.setText("");
                 setColor(true, button);
             } else {
                 button.setText(String.valueOf(value));
